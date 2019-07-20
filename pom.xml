@@ -17,6 +17,7 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>example</module>
     <module>nfs-rpc-common</module>
     <module>nfs-rpc-grizzly</module>
     <module>nfs-rpc-mina</module>
