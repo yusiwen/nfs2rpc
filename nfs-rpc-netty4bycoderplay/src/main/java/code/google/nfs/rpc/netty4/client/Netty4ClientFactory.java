@@ -1,11 +1,7 @@
 package code.google.nfs.rpc.netty4.client;
 
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
+
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -25,7 +21,7 @@ import code.google.nfs.rpc.netty4.serialize.Netty4ProtocolEncoder;
 
 /**
  * Netty4 Client Factory,to create client based on netty API
- * 
+ *
  * @author <a href="mailto:coderplay@gmail.com">Min Zhou</a>
  */
 public class Netty4ClientFactory extends AbstractClientFactory {

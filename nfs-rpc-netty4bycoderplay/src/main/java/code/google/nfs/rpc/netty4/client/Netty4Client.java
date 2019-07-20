@@ -1,11 +1,7 @@
 package code.google.nfs.rpc.netty4.client;
 
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
+
+
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 
@@ -22,7 +18,7 @@ import code.google.nfs.rpc.client.ClientFactory;
 
 /**
  * Netty4 Client
- * 
+ *
  * @author <a href="mailto:coderplay@gmail.com">Min Zhou</a>
  */
 public class Netty4Client extends AbstractClient {
@@ -69,7 +65,7 @@ public class Netty4Client extends AbstractClient {
 					if (cf.channel().isActive()) {
 						// maybe some exception,so close the channel
 						cf.channel().close();
-					} 
+					}
 					else {
 						Netty4ClientFactory.getInstance().removeClient(key, self);
 					}

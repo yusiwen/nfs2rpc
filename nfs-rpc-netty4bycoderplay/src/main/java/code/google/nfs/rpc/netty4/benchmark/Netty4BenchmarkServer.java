@@ -1,11 +1,7 @@
 package code.google.nfs.rpc.netty4.benchmark;
 
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
+
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -31,13 +27,13 @@ import com.google.protobuf.ByteString;
 
 /**
  * Netty4 RPC Benchmark Server
- * 
+ *
  * @author <a href="mailto:coderplay@gmail.com">Min Zhou</a>
  */
 public class Netty4BenchmarkServer extends AbstractBenchmarkServer {
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm:ss");
-	
+
 	private int concurrency = 1;
 
 	public void run(String[] args) throws Exception {
@@ -89,7 +85,7 @@ public class Netty4BenchmarkServer extends AbstractBenchmarkServer {
 
 		server.start(listenPort, null);
 	}
-	
+
 	public static void main(String[] args) throws Exception {
 		new Netty4BenchmarkServer().run(args);
 	}

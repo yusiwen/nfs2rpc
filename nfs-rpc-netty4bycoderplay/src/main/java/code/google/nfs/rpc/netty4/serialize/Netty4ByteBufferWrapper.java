@@ -1,26 +1,22 @@
 package code.google.nfs.rpc.netty4.serialize;
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
+
+
 import io.netty.buffer.ByteBuf;
 import code.google.nfs.rpc.protocol.ByteBufferWrapper;
 /**
  * Implements ByteBufferWrapper based on Netty4 ByteBuf
- * 
+ *
  * @author <a href="mailto:coderplay@gmail.com">Min Zhou</a>
  */
 public class Netty4ByteBufferWrapper implements ByteBufferWrapper {
 
 	private ByteBuf buffer;
-	
-	
+
+
 	public Netty4ByteBufferWrapper(ByteBuf in){
 		buffer = in;
 	}
-	
+
 	public ByteBufferWrapper get(int capacity) {
 		return this;
 	}
@@ -60,7 +56,7 @@ public class Netty4ByteBufferWrapper implements ByteBufferWrapper {
 	public void writeInt(int data) {
 		buffer.writeInt(data);
 	}
-	
+
 	public ByteBuf getBuffer(){
 		return buffer;
 	}

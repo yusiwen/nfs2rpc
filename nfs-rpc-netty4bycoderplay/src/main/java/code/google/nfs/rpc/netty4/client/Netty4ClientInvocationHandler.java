@@ -1,10 +1,6 @@
 package code.google.nfs.rpc.netty4.client;
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
+
+
 import java.net.InetSocketAddress;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +9,7 @@ import code.google.nfs.rpc.client.AbstractClientInvocationHandler;
 import code.google.nfs.rpc.client.ClientFactory;
 /**
  * Netty4 Client Invocation Handler for Client Proxy
- * 
+ *
  * @author <a href="mailto:coderplay@gmail.com">Min Zhou</a>
  */
 public class Netty4ClientInvocationHandler extends

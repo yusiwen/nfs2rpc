@@ -1,10 +1,6 @@
 package code.google.nfs.rpc.netty4.benchmark;
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
+
+
 import java.lang.reflect.Proxy;
 import java.net.InetSocketAddress;
 import java.util.List;
@@ -16,7 +12,7 @@ import code.google.nfs.rpc.netty4.client.Netty4ClientInvocationHandler;
 
 /**
  * Netty4 RPC Benchmark Client
- * 
+ *
  * @author <a href="mailto:coderplay@gmail.com">Min Zhou</a>
  */
 public class Netty4RPCBenchmarkClient extends AbstractRPCBenchmarkClient {

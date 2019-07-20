@@ -1,11 +1,5 @@
 package code.google.nfs.rpc.mina2.serialize;
 
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,43 +11,42 @@ import org.apache.mina.filter.codec.ProtocolDecoderOutput;
 
 /**
  * Encoder & Decoder Filter for mina
- * 
+ *
  * @author <a href="mailto:bluedavy@gmail.com">bluedavy</a>
  */
 public class MinaProtocolCodecFilter extends ProtocolCodecFilter {
 
-	private final AttributeKey DECODER_OUT = new AttributeKey(ProtocolCodecFilter.class, "decoderOut");
-	
-	public MinaProtocolCodecFilter() {
-		super(new MinaProtocolEncoder(), new MinaProtocolDecoder());
-	}
+  private final AttributeKey DECODER_OUT = new AttributeKey(ProtocolCodecFilter.class, "decoderOut");
 
-	public void messageReceived(NextFilter nextFilter, IoSession session,
-			Object message) throws Exception {
-		session.setAttribute(DECODER_OUT,new MinaProtocolDecoderOutput(session));
-		super.messageReceived(nextFilter, session, message);
-	}
+  public MinaProtocolCodecFilter() {
+    super(new MinaProtocolEncoder(), new MinaProtocolDecoder());
+  }
 
-	class MinaProtocolDecoderOutput implements ProtocolDecoderOutput {
+  public void messageReceived(NextFilter nextFilter, IoSession session, Object message) throws Exception {
+    session.setAttribute(DECODER_OUT, new MinaProtocolDecoderOutput(session));
+    super.messageReceived(nextFilter, session, message);
+  }
 
-		private final IoSession session;
+  class MinaProtocolDecoderOutput implements ProtocolDecoderOutput {
 
-		private final List<Object> messageQueue = new ArrayList<Object>();
+    private final IoSession session;
 
-		public MinaProtocolDecoderOutput(IoSession session) {
-			this.session = session;
-		}
+    private final List<Object> messageQueue = new ArrayList<Object>();
 
-		public void write(Object message) {
-			messageQueue.add(message);
-			if (session instanceof AbstractIoSession) {
-				((AbstractIoSession) session).increaseReadMessages(System.currentTimeMillis());
-			}
-		}
-		
-		public void flush(NextFilter nextFilter, IoSession session) {
-			nextFilter.messageReceived(session, messageQueue);
-		}
-	}
+    public MinaProtocolDecoderOutput(IoSession session) {
+      this.session = session;
+    }
+
+    public void write(Object message) {
+      messageQueue.add(message);
+      if (session instanceof AbstractIoSession) {
+        ((AbstractIoSession) session).increaseReadMessages(System.currentTimeMillis());
+      }
+    }
+
+    public void flush(NextFilter nextFilter, IoSession session) {
+      nextFilter.messageReceived(session, messageQueue);
+    }
+  }
 
 }

@@ -1,11 +1,7 @@
 package code.google.nfs.rpc.netty4.server;
 
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
+
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -29,7 +25,7 @@ import code.google.nfs.rpc.server.Server;
 
 /**
  * Netty4 Server
- * 
+ *
  * @author <a href="mailto:coderplay@gmail.com">Min Zhou</a>
  */
 public class Netty4Server implements Server {
@@ -57,10 +53,10 @@ public class Netty4Server implements Server {
 
 		ServerBootstrap b = new ServerBootstrap();
 		b.group(bossGroup, ioGroup).channel(NioServerSocketChannel.class)
-		        .childOption(ChannelOption.TCP_NODELAY, 
+		        .childOption(ChannelOption.TCP_NODELAY,
 		                     Boolean.parseBoolean(System.getProperty(
 		                             "nfs.rpc.tcp.nodelay", "true")))
-		        .childOption(ChannelOption.SO_REUSEADDR, 
+		        .childOption(ChannelOption.SO_REUSEADDR,
 		                     Boolean.parseBoolean(System.getProperty(
 		                             "nfs.rpc.tcp.reuseaddress", "true")))
 		        .childHandler(new ChannelInitializer<SocketChannel>() {

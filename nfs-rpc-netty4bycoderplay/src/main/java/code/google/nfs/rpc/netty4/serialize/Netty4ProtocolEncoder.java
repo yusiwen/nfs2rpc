@@ -8,15 +8,11 @@ import org.apache.commons.logging.LogFactory;
 
 import code.google.nfs.rpc.ResponseWrapper;
 import code.google.nfs.rpc.protocol.ProtocolUtils;
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
+
+
 /**
  * Encode Message
- * 
+ *
  * @author <a href="mailto:coderplay@gmail.com">Min Zhou</a>
  */
 public class Netty4ProtocolEncoder extends MessageToByteEncoder<Object> {

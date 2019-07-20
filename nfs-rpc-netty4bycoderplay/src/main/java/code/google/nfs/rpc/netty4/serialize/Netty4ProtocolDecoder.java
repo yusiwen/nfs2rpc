@@ -9,16 +9,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import code.google.nfs.rpc.protocol.ProtocolUtils;
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
+
+
 /**
  * decode byte[]
  * 	change to pipeline receive requests or responses,let's IO thread do less thing
- * 
+ *
  * @author <a href="mailto:coderplay@gmail.com">Min Zhou</a>
  */
 public class Netty4ProtocolDecoder extends ByteToMessageDecoder {

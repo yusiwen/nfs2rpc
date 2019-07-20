@@ -1,11 +1,7 @@
 package code.google.nfs.rpc.netty4.server;
 
-/**
- * nfs-rpc
- *   Apache License
- *   
- *   http://code.google.com/p/nfs-rpc (c) 2011
- */
+
+
 import java.io.IOException;
 
 import io.netty.channel.ChannelFuture;
@@ -24,7 +20,7 @@ import code.google.nfs.rpc.ResponseWrapper;
 
 /**
  * Netty4 Server Handler
- * 
+ *
  * @author <a href="mailto:coderplay@gmail.com">Min Zhou</a>
  */
 public class Netty4ServerHandler extends SimpleChannelInboundHandler<Object> {
@@ -46,7 +42,7 @@ public class Netty4ServerHandler extends SimpleChannelInboundHandler<Object> {
 			LOGGER.error("catch some exception not IOException", cause);
 		}
     }
-  
+
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, Object msg)
 			throws Exception {
