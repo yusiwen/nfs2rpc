@@ -121,7 +121,11 @@ public class MinaServerHandler extends IoHandlerAdapter {
         wf.addListener(new IoFutureListener() {
           public void operationComplete(IoFuture future) {
             if (!((WriteFuture) future).isWritten()) {
-              LOGGER.error("server write response error,request id is: " + id);
+              if (!future.getSession().isClosing() && !future.getSession().isConnected()) {
+                LOGGER.error("server write response error,request id is: " + id);
+              } else {
+                LOGGER.error("server detected client closing,request id is: " + id);
+              }
             }
           }
         });
