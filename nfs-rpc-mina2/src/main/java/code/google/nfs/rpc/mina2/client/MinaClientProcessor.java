@@ -37,6 +37,11 @@ public class MinaClientProcessor extends IoHandlerAdapter {
   }
 
   public void messageReceived(IoSession session, Object message) throws Exception {
+    if (factory.isShutdown().get()) {
+      session.close(true);
+      return;
+    }
+
     if (message instanceof List) {
       @SuppressWarnings("unchecked")
       List<ResponseWrapper> responses = (List<ResponseWrapper>) message;
