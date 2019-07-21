@@ -7,11 +7,11 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.SynchronousQueue;
 
 import code.google.nfs.rpc.NamedThreadFactory;
-import code.google.nfs.rpc.mina.server.MinaServer;
+import code.google.nfs.rpc.mina2.server.MinaServer;
 import code.google.nfs.rpc.protocol.RPCProtocol;
 import code.google.nfs.rpc.server.Server;
 
-public class TestRPCServer {
+public class TestMina2RPCServer {
   public static void main(String[] args) throws Exception {
     Server server = new MinaServer();
     server.registerProcessor(RPCProtocol.TYPE, "helloworld", new HelloWorldComponent());

@@ -8,10 +8,11 @@ import java.util.List;
 import java.util.Map;
 
 import code.google.nfs.rpc.Codecs;
-import code.google.nfs.rpc.mina.client.MinaClientInvocationHandler;
+import code.google.nfs.rpc.mina2.client.MinaClientFactory;
+import code.google.nfs.rpc.mina2.client.MinaClientInvocationHandler;
 import code.google.nfs.rpc.protocol.RPCProtocol;
 
-public class TestRPCClient {
+public class TestMina2RCPClient {
   public static void main(String[] args) {
 
     Map<String, Integer> methodTimeouts = new HashMap<String, Integer>();
@@ -24,12 +25,16 @@ public class TestRPCClient {
     // Protocol also support Protobuf & Java,if u use Protobuf,u need call
     // PBDecoder.addMessage first.
     int codectype = Codecs.HESSIAN_CODEC;
-    HelloWorldService service = (HelloWorldService) Proxy.newProxyInstance(TestRPCClient.class.getClassLoader(),
-        new Class<?>[] { HelloWorldService.class }, new MinaClientInvocationHandler(servers, 5, 30,
-            "helloworld", methodTimeouts, codectype, RPCProtocol.TYPE));
+    MinaClientInvocationHandler handler = new MinaClientInvocationHandler(servers, 1, 30,
+            "helloworld", methodTimeouts, codectype, RPCProtocol.TYPE);
+    HelloWorldService service = (HelloWorldService) Proxy.newProxyInstance(TestMina2RCPClient.class.getClassLoader(),
+        new Class<?>[] { HelloWorldService.class }, handler);
 
     // Use proxy to call
     String result = service.sayHello("hello");
     System.out.println(result);
+
+    MinaClientFactory f = (MinaClientFactory) handler.getClientFactory();
+    f.shutdown(false);
   }
 }
