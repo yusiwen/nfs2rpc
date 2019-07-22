@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>nfs-rpc-all</artifactId>
 		<groupId>code.google.nfs.rpc</groupId>
-		<version>1.0</version>
+		<version>1.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
