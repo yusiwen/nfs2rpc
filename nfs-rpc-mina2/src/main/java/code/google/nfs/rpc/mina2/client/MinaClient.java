@@ -68,7 +68,7 @@ public class MinaClient extends AbstractClient {
           if (isWarnEnabled) {
             LOGGER.warn("close the session because send request error,server:" + session.getRemoteAddress());
           }
-          session.close(true);
+          session.closeNow();
         } else {
           // TODO: exception handle
           MinaClientFactory.getInstance().removeClient(key, self);
