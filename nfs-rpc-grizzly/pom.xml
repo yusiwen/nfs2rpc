@@ -40,7 +40,7 @@
 		<dependency>
 			<groupId>org.glassfish.grizzly</groupId>
 			<artifactId>grizzly-framework</artifactId>
-			<version>2.2.9</version>
+			<version>2.4.4</version>
 		</dependency>
 		<dependency>
 			<groupId>code.google.nfs.rpc</groupId>
