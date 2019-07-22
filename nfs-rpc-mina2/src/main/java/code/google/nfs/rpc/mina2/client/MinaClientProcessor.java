@@ -36,9 +36,9 @@ public class MinaClientProcessor extends IoHandlerAdapter {
     this.client = minaClient;
   }
 
+  @Override
   public void messageReceived(IoSession session, Object message) throws Exception {
     if (factory.isShutdown().get()) {
-      session.close(true);
       return;
     }
 
@@ -65,6 +65,7 @@ public class MinaClientProcessor extends IoHandlerAdapter {
     }
   }
 
+  @Override
   public void exceptionCaught(IoSession session, Throwable cause) throws Exception {
     if (!(cause instanceof IOException)) {
       // only log
@@ -72,9 +73,22 @@ public class MinaClientProcessor extends IoHandlerAdapter {
     }
   }
 
+  @Override
   public void sessionClosed(IoSession session) throws Exception {
     LOGGER.warn("session closed,server is: " + session.getRemoteAddress());
     factory.removeClient(key, client);
+  }
+
+  @Override
+  public void sessionCreated(IoSession session) throws Exception {
+    super.sessionCreated(session);
+    LOGGER.debug("session " + session.getId() + " created");
+  }
+
+  @Override
+  public void sessionOpened(IoSession session) throws Exception {
+    super.sessionOpened(session);
+    LOGGER.debug("session " + session.getId() + " opened");
   }
 
 }

@@ -77,6 +77,7 @@ public class MinaClientFactory extends AbstractClientFactory {
     List<ConnectFuture> cfList = cfs.get(key);
     if (cfList == null) {
       cfList = new ArrayList<ConnectFuture>();
+      cfs.put(key, cfList);
     }
     cfList.add(connectFuture);
     // wait for connection established
@@ -107,10 +108,16 @@ public class MinaClientFactory extends AbstractClientFactory {
 
           @Override
           public void operationComplete(IoFuture future) {
-            LOGGER.debug("seesion is now closed");
+            LOGGER.debug("session " + future.getSession().getId() + " is now closed");
           }
         });
-        closeFuture.getSession().close(immdediately);
+        if (immdediately) {
+          LOGGER.debug("session " + closeFuture.getSession().getId() + " is closing now");
+          closeFuture.getSession().closeNow();
+        } else {
+          LOGGER.debug("session " + closeFuture.getSession().getId() + " is closing on flush");
+          closeFuture.getSession().closeOnFlush();
+        }
         closeFuture.awaitUninterruptibly();
       }
     }
