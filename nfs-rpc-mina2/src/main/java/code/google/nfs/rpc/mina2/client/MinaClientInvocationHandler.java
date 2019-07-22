@@ -19,6 +19,7 @@ public class MinaClientInvocationHandler extends AbstractClientInvocationHandler
     super(servers, clientNums, connectTimeout, targetInstanceName, methodTimeouts, codecType, protocolType);
   }
 
+  @Override
   public ClientFactory getClientFactory() {
     return MinaClientFactory.getInstance();
   }

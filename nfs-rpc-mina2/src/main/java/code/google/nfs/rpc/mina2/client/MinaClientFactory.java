@@ -60,6 +60,7 @@ public class MinaClientFactory extends AbstractClientFactory {
     return _self;
   }
 
+  @Override
   protected Client createClient(String targetIP, int targetPort, int connectTimeout, String key) throws Exception {
     if (isDebugEnabled) {
       LOGGER.debug(
@@ -98,7 +99,7 @@ public class MinaClientFactory extends AbstractClientFactory {
     return client;
   }
 
-  public void shutdown(boolean immdediately) {
+  public void shutdown(boolean immediately) {
     isShutdown.set(true);
     for (Map.Entry<String, List<ConnectFuture>> entry : cfs.entrySet()) {
       List<ConnectFuture> list = entry.getValue();
@@ -111,7 +112,7 @@ public class MinaClientFactory extends AbstractClientFactory {
             LOGGER.debug("session " + future.getSession().getId() + " is now closed");
           }
         });
-        if (immdediately) {
+        if (immediately) {
           LOGGER.debug("session " + closeFuture.getSession().getId() + " is closing now");
           closeFuture.getSession().closeNow();
         } else {
