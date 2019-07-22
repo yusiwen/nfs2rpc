@@ -23,6 +23,11 @@
     </dependency>
     <dependency>
       <groupId>code.google.nfs.rpc</groupId>
+      <artifactId>nfs-rpc-grizzly</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>code.google.nfs.rpc</groupId>
       <artifactId>nfs-rpc-mina2</artifactId>
       <version>${project.version}</version>
     </dependency>

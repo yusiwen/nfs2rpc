@@ -49,6 +49,8 @@ public class GrizzlyServer implements Server {
 
     transport.start();
     LOGGER.warn("server started,listen at: " + listenPort);
+
+    Thread.currentThread().join();
   }
 
   public void stop() throws Exception {
