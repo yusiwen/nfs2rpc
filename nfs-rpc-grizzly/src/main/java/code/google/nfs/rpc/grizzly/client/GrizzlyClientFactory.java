@@ -84,6 +84,7 @@ public class GrizzlyClientFactory extends AbstractClientFactory {
   }
 
   @SuppressWarnings("rawtypes")
+  @Override
   public void shutdown(boolean immediately) {
 
     for (Map.Entry<String, List<Connection>> entry : cns.entrySet()) {

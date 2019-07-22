@@ -48,4 +48,6 @@ public interface ClientFactory {
    */
   public void enableSendLimit();
 
+  public void shutdown(boolean immediately);
+
 }

@@ -99,6 +99,7 @@ public class MinaClientFactory extends AbstractClientFactory {
     return client;
   }
 
+  @Override
   public void shutdown(boolean immediately) {
     isShutdown.set(true);
     for (Map.Entry<String, List<ConnectFuture>> entry : cfs.entrySet()) {

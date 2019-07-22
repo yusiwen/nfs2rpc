@@ -89,6 +89,7 @@ public class NettyClientFactory extends AbstractClientFactory {
     return client;
   }
 
+  @Override
   public void shutdown(boolean immediately) {
     workerGroup.shutdownGracefully();
   }
