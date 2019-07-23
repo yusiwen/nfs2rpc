@@ -25,6 +25,7 @@ public class MinaClient extends AbstractClient {
   private static final Log LOGGER = LogFactory.getLog(MinaClient.class);
 
   private static final boolean isWarnEnabled = LOGGER.isWarnEnabled();
+  private static final boolean isDebugEnabled = LOGGER.isDebugEnabled();
 
   private IoSession session;
 
@@ -41,12 +42,20 @@ public class MinaClient extends AbstractClient {
   @SuppressWarnings("rawtypes")
   public void sendRequest(final RequestWrapper wrapper, final int timeout) throws Exception {
     final long beginTime = System.currentTimeMillis();
+    if (isDebugEnabled) {
+      LOGGER.debug("session " + session.getId() + " start sending message: " + wrapper.getId());
+    }
     WriteFuture writeFuture = session.write(wrapper);
     final Client self = this;
     writeFuture.addListener(new IoFutureListener() {
       public void operationComplete(IoFuture future) {
         WriteFuture wfuture = (WriteFuture) future;
         if (wfuture.isWritten()) {
+          if (isDebugEnabled) {
+            long elapsed = System.currentTimeMillis() - beginTime;
+            LOGGER.debug(
+                "session " + session.getId() + " finish sending message: " + wrapper.getId() + ",elasped: " + elapsed);
+          }
           return;
         }
         String error = "send message to server: " + session.getRemoteAddress()

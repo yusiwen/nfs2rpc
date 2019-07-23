@@ -40,7 +40,26 @@ public class MinaServerHandler extends IoHandlerAdapter {
     }
   }
 
+  @Override
+  public void sessionClosed(IoSession session) throws Exception {
+    LOGGER.debug("session: " + session.getId() + " closed");
+  }
+
+  @Override
+  public void sessionCreated(IoSession session) throws Exception {
+    LOGGER.debug("session: " + session.getId() + " created");
+  }
+
+  @Override
+  public void sessionOpened(IoSession session) throws Exception {
+    LOGGER.debug("session: " + session.getId() + " opened");
+  }
+
   public void messageReceived(final IoSession session, final Object message) throws Exception {
+    if (session.isClosing() || !session.isConnected()) {
+      return;
+    }
+    LOGGER.debug("session: " + session.getId() + " received message: " + message);
     if (!(message instanceof RequestWrapper) && !(message instanceof List)) {
       LOGGER.error("receive message error,only support RequestWrapper || List");
       throw new Exception("receive message error,only support RequestWrapper || List");
@@ -50,6 +69,9 @@ public class MinaServerHandler extends IoHandlerAdapter {
 
   @SuppressWarnings("unchecked")
   private void handleRequest(final IoSession session, final Object message) {
+    if (session.isClosing() || !session.isConnected()) {
+      return;
+    }
     try {
       threadpool.execute(new HandlerRunnable(session, message, threadpool));
     } catch (RejectedExecutionException exception) {
@@ -101,11 +123,13 @@ public class MinaServerHandler extends IoHandlerAdapter {
       // pipeline
       if (message instanceof List) {
         List messages = (List) message;
+        LOGGER.debug("processing message list,size: " + messages.size());
         for (Object messageObject : messages) {
           threadPool.execute(new HandlerRunnable(session, messageObject, threadPool));
         }
       } else {
         RequestWrapper request = (RequestWrapper) message;
+        LOGGER.debug("processing message: " + request.getId());
         long beginTime = System.currentTimeMillis();
         ResponseWrapper responseWrapper = ProtocolFactory.getServerHandler(request.getProtocolType())
             .handleRequest(request);
@@ -131,7 +155,5 @@ public class MinaServerHandler extends IoHandlerAdapter {
         });
       }
     }
-
   }
-
 }

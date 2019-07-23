@@ -81,14 +81,22 @@ public class MinaClientProcessor extends IoHandlerAdapter {
 
   @Override
   public void sessionCreated(IoSession session) throws Exception {
-    super.sessionCreated(session);
-    LOGGER.debug("session " + session.getId() + " created");
+    if (isDebugEnabled) {
+      LOGGER.debug("session " + session.getId() + " created");
+    }
   }
 
   @Override
   public void sessionOpened(IoSession session) throws Exception {
-    super.sessionOpened(session);
-    LOGGER.debug("session " + session.getId() + " opened");
+    if (isDebugEnabled) {
+      LOGGER.debug("session " + session.getId() + " opened");
+    }
   }
 
+  @Override
+  public void messageSent(IoSession session, Object message) throws Exception {
+    if (isDebugEnabled) {
+      LOGGER.debug("session " + session.getId() + " sent message: " + message);
+    }
+  }
 }
