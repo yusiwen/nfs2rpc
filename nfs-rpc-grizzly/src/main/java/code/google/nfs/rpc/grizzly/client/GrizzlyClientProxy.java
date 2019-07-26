@@ -22,7 +22,7 @@ public class GrizzlyClientProxy extends AbstractClientProxy {
   public Object getServiceProxy(String instanceName, int codecType, Class<?> clazz) {
 
     if (methodTimeouts.size() == 0) {
-      methodTimeouts.put("*", 500);
+      methodTimeouts.put("*", DEFAULT_TIMEOUT);
     }
 
     List<InetSocketAddress> servers = new ArrayList<>();

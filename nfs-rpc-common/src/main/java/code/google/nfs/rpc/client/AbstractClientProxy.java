@@ -5,6 +5,8 @@ import java.util.Map;
 
 public abstract class AbstractClientProxy implements ClientProxy {
 
+  public final static int DEFAULT_TIMEOUT = 500; // Default call timeout 500ms
+
   protected int clientNums = 1;
   protected int connectTimeout = 30;
   protected String serverIp = null;
