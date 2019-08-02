@@ -15,6 +15,8 @@ public interface ServerHandler {
    */
   public void registerProcessor(String instanceName, Object instance);
 
+  public void unregisterProcessor(String instanceName, Object instance);
+
   /**
    * handle the request
    */

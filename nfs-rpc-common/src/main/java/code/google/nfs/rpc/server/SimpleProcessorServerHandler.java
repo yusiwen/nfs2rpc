@@ -25,6 +25,10 @@ public class SimpleProcessorServerHandler implements ServerHandler {
     processors.put(instanceName, (ServerProcessor) instance);
   }
 
+  public void unregisterProcessor(String instanceName, Object instance) {
+    processors.remove(instanceName);
+  }
+
   public ResponseWrapper handleRequest(final RequestWrapper request) {
     ResponseWrapper responseWrapper = new ResponseWrapper(request.getId(), request.getCodecType(),
         request.getProtocolType());

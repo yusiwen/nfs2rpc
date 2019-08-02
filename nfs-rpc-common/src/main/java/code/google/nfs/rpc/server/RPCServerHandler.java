@@ -1,8 +1,8 @@
 package code.google.nfs.rpc.server;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,13 +21,12 @@ public class RPCServerHandler implements ServerHandler {
   private static final Log LOGGER = LogFactory.getLog(RPCServerHandler.class);
 
   // Server Processors key: servicename value: service instance
-  private static Map<String, Object> processors = new HashMap<String, Object>();
+  private static Map<String, Object> processors = new ConcurrentHashMap<String, Object>();
 
   // Cached Server Methods key: instanceName#methodname$argtype_argtype
-  private static Map<String, Method> cacheMethods = new HashMap<String, Method>();
+  private static Map<String, Method> cacheMethods = new ConcurrentHashMap<String, Method>();
 
-  public void registerProcessor(String instanceName, Object instance) {
-    processors.put(instanceName, instance);
+  private void processMethodNames(String instanceName, Object instance, boolean isDelete) {
     Class<?> instanceClass = instance.getClass();
     Method[] methods = instanceClass.getMethods();
     for (Method method : methods) {
@@ -38,10 +37,27 @@ public class RPCServerHandler implements ServerHandler {
       for (Class<?> argClass : argTypes) {
         methodKeyBuilder.append(argClass.getName()).append("_");
       }
-      cacheMethods.put(methodKeyBuilder.toString(), method);
+      if (isDelete) {
+        cacheMethods.remove(methodKeyBuilder.toString());
+      } else {
+        cacheMethods.put(methodKeyBuilder.toString(), method);
+      }
     }
   }
 
+  @Override
+  public void registerProcessor(String instanceName, Object instance) {
+    processors.put(instanceName, instance);
+    processMethodNames(instanceName, instance, false);
+  }
+
+  @Override
+  public void unregisterProcessor(String instanceName, Object instance) {
+    processors.remove(instanceName);
+    processMethodNames(instanceName, instance, true);
+  }
+
+  @Override
   public ResponseWrapper handleRequest(final RequestWrapper request) {
     ResponseWrapper responseWrapper = new ResponseWrapper(request.getId(), request.getCodecType(),
         request.getProtocolType());

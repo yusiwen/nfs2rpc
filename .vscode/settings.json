@@ -1,4 +1,5 @@
 {
   "java.configuration.updateBuildConfiguration": "automatic",
-  "search.usePCRE2": true
+  "search.usePCRE2": true,
+  "java.dependency.packagePresentation": "flat"
 }
