@@ -27,7 +27,7 @@ module.exports = {
   scopes: [
     {name: 'assembly'}, {name: 'nfs-rpc-common'}, {name: 'nfs-rpc-grizzly'},
     {name: 'nfs-rpc-mina2'}, {name: 'nfs-rpc-netty4'}, {name: 'nfs-rpc-script'},
-    {name: 'tool'}, {name: 'example'}
+    {name: 'tool'}, {name: 'nfs-rpc-example'}, {name: 'nfs-rpc-osgi-test'}
   ],
 
   allowTicketNumber: false,
