@@ -6,7 +6,7 @@ import code.google.nfs.rpc.netty.client.NettyClientProxy;
 public class TestNettyRCPClient {
   public static void main(String[] args) {
 
-    NettyClientProxy proxy = new NettyClientProxy("127.0.0.1", 18888);
+    NettyClientProxy proxy = new NettyClientProxy("192.168.2.54", 18887);
     HelloWorldService service = (HelloWorldService) proxy.getServiceProxy("helloworld", Codecs.HESSIAN_CODEC, HelloWorldService.class);
 
     // Use proxy to call

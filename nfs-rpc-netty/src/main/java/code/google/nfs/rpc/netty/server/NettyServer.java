@@ -39,6 +39,8 @@ public class NettyServer implements Server {
 
   private static final Log LOGGER = LogFactory.getLog(NettyServer.class);
 
+  private EventLoopGroup bossGroup = null;
+  private NioEventLoopGroup workerGroup = null;
   private ServerBootstrap bootstrap = null;
 
   private AtomicBoolean startFlag = new AtomicBoolean(false);
@@ -48,8 +50,8 @@ public class NettyServer implements Server {
   public NettyServer() {
     ThreadFactory serverBossTF = new NamedThreadFactory("NETTYSERVER-BOSS-");
     ThreadFactory serverWorkerTF = new NamedThreadFactory("NETTYSERVER-WORKER-");
-    EventLoopGroup bossGroup = new NioEventLoopGroup(PROCESSORS, serverBossTF);
-    NioEventLoopGroup workerGroup = new NioEventLoopGroup(PROCESSORS * 2, serverWorkerTF);
+    bossGroup = new NioEventLoopGroup(PROCESSORS, serverBossTF);
+    workerGroup = new NioEventLoopGroup(PROCESSORS * 2, serverWorkerTF);
     workerGroup.setIoRatio(Integer.parseInt(System.getProperty("nfs.rpc.io.ratio", "50")));
     bootstrap = new ServerBootstrap();
     bootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
@@ -87,6 +89,12 @@ public class NettyServer implements Server {
   public void stop() throws Exception {
     LOGGER.warn("Server stop!");
     startFlag.set(false);
+    if (bossGroup != null) {
+      bossGroup.shutdownGracefully();
+    }
+    if (workerGroup != null) {
+      workerGroup.shutdownGracefully();
+    }
   }
 
   @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC)

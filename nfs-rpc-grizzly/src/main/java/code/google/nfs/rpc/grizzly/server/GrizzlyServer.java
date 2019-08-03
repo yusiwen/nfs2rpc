@@ -28,7 +28,7 @@ import code.google.nfs.rpc.server.Server;
  *
  * @author <a href="mailto:bluedavy@gmail.com">bluedavy</a>
  */
-@Component(name = "code.google.nfs.rpc.grizzly.server", service = Server.class, property = { "type=mina" })
+@Component(name = "code.google.nfs.rpc.grizzly.server", service = Server.class, property = { "type=grizzly" })
 public class GrizzlyServer implements Server {
 
   private static final Log LOGGER = LogFactory.getLog(GrizzlyServer.class);
