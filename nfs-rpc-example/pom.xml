@@ -1,17 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>nfs-rpc-all</artifactId>
     <groupId>code.google.nfs.rpc</groupId>
     <version>1.0.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>nfs-rpc-common</artifactId>
+  <artifactId>nfs-rpc-example</artifactId>
   <packaging>bundle</packaging>
 
-  <name>nfs-rpc-common</name>
-  <url>http://bluedavy.com/projects/nfs-rpc/</url>
+  <name>nfs-rpc-example</name>
+  <url>http://bluedavy.com/projects/rpc-benchmark/mina</url>
 
   <build>
     <plugins>
@@ -21,8 +22,10 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Import-Package>!code.google.nfs.rpc.*,*</Import-Package>
-            <Export-Package>code.google.nfs.rpc.*;version=${project.version}</Export-Package>
+            <Import-Package>
+              code.google.nfs.rpc;version="[1.0,2)",
+              org.apache.commons.logging;version="[1.1,2)",
+            </Import-Package>
           </instructions>
         </configuration>
       </plugin>
@@ -36,20 +39,29 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.google.protobuf</groupId>
-      <artifactId>protobuf-java</artifactId>
+        <groupId>org.osgi</groupId>
+        <artifactId>osgi.core</artifactId>
+        <scope>provided</scope>
+      </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.cmpn</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.caucho</groupId>
-      <artifactId>hessian</artifactId>
+      <groupId>code.google.nfs.rpc</groupId>
+      <artifactId>nfs-rpc-grizzly</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.esotericsoftware.kryo</groupId>
-      <artifactId>kryo</artifactId>
+      <groupId>code.google.nfs.rpc</groupId>
+      <artifactId>nfs-rpc-mina</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
+      <groupId>code.google.nfs.rpc</groupId>
+      <artifactId>nfs-rpc-netty</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>

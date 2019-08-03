@@ -27,12 +27,12 @@
   </issueManagement>
 
   <modules>
-    <module>example</module>
+    <module>nfs-rpc-example</module>
     <module>nfs-rpc-common</module>
     <module>nfs-rpc-grizzly</module>
     <module>nfs-rpc-mina</module>
-    <module>nfs-rpc-netty4</module>
-    <module>osgi-test</module>
+    <module>nfs-rpc-netty</module>
+    <module>nfs-rpc-osgi-test</module>
   </modules>
 
   <build>

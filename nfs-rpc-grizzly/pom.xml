@@ -9,10 +9,26 @@
 	</parent>
 
 	<artifactId>nfs-rpc-grizzly</artifactId>
-	<packaging>jar</packaging>
+	<packaging>bundle</packaging>
 
 	<name>nfs-rpc-grizzly</name>
 	<url>http://bluedavy.com/projects/rpc-benchmark/grizzly</url>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Import-Package>!code.google.nfs.rpc.grizzly.*,*</Import-Package>
+            <Export-Package>code.google.nfs.rpc.grizzly.*;version=${project.version}</Export-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 	<dependencies>
 		<dependency>
@@ -20,6 +36,11 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.cmpn</artifactId>
+      <scope>provided</scope>
+    </dependency>
 		<dependency>
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java</artifactId>

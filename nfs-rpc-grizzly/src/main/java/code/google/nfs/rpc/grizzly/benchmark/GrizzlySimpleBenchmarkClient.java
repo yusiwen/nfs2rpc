@@ -25,6 +25,7 @@ public class GrizzlySimpleBenchmarkClient extends AbstractSimpleProcessorBenchma
     return GrizzlyClientFactory.getInstance();
   }
 
+  @Override
   protected void startRunnables(List<ClientRunnable> runnables) {
     ThreadPoolConfig tpc = ThreadPoolConfig.defaultConfig().copy().setPoolName("benchmarkclient")
         .setMaxPoolSize(runnables.size()).setCorePoolSize(runnables.size());

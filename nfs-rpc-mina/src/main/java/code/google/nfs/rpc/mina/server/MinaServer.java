@@ -24,7 +24,7 @@ import code.google.nfs.rpc.server.Server;
  *
  * @author <a href="mailto:bluedavy@gmail.com">bluedavy</a>
  */
-@Component(name = "MinaServer", service = Server.class, property = { "type=mina" }, immediate = true)
+@Component(name = "code.google.nfs.rpc.mina.server", service = Server.class, property = { "type=mina" })
 public class MinaServer implements Server {
 
   private static final Log LOGGER = LogFactory.getLog(MinaServer.class);

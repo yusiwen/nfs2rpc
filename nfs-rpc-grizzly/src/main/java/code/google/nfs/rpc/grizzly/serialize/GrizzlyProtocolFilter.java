@@ -28,6 +28,7 @@ public class GrizzlyProtocolFilter extends BaseFilter {
       .createAttribute("GrizzlyProtocolFilter.outputBuffer");
 
   // decode object
+  @Override
   public NextAction handleRead(FilterChainContext ctx) throws IOException {
     final Object message = ctx.getMessage();
     if (message instanceof IncompleteBufferHolder) {
@@ -63,6 +64,7 @@ public class GrizzlyProtocolFilter extends BaseFilter {
   }
 
   // encode object
+  @Override
   public NextAction handleWrite(FilterChainContext ctx) throws IOException {
     GrizzlyByteBufferWrapper wrapper = new GrizzlyByteBufferWrapper(ctx);
     try {

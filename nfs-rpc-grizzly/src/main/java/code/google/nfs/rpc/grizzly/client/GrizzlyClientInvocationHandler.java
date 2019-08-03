@@ -19,6 +19,7 @@ public class GrizzlyClientInvocationHandler extends AbstractClientInvocationHand
     super(servers, clientNums, connectTimeout, targetInstanceName, methodTimeouts, codecType, protocolType);
   }
 
+  @Override
   public ClientFactory getClientFactory() {
     return GrizzlyClientFactory.getInstance();
   }

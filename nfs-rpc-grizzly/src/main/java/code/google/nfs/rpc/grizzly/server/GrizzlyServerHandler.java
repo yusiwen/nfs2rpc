@@ -34,6 +34,7 @@ public class GrizzlyServerHandler extends BaseFilter {
     this.threadPool = threadPool;
   }
 
+  @Override
   public NextAction handleRead(final FilterChainContext ctx) throws IOException {
     final Object message = ctx.getMessage();
     final Connection connection = ctx.getConnection();
@@ -86,6 +87,7 @@ public class GrizzlyServerHandler extends BaseFilter {
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
+    @Override
     public void run() {
       // pipeline
       if (message instanceof List) {

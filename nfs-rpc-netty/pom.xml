@@ -1,17 +1,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
   <parent>
     <artifactId>nfs-rpc-all</artifactId>
     <groupId>code.google.nfs.rpc</groupId>
     <version>1.0.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
-  <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>nfs-rpc-common</artifactId>
+  <artifactId>nfs-rpc-netty</artifactId>
   <packaging>bundle</packaging>
 
-  <name>nfs-rpc-common</name>
-  <url>http://bluedavy.com/projects/nfs-rpc/</url>
+  <name>nfs-rpc-netty</name>
+  <url>http://bluedavy.me/projects/rpc-benchmark/netty4</url>
 
   <build>
     <plugins>
@@ -21,8 +22,8 @@
         <extensions>true</extensions>
         <configuration>
           <instructions>
-            <Import-Package>!code.google.nfs.rpc.*,*</Import-Package>
-            <Export-Package>code.google.nfs.rpc.*;version=${project.version}</Export-Package>
+            <Import-Package>!code.google.nfs.rpc.netty.*,*</Import-Package>
+            <Export-Package>code.google.nfs.rpc.netty.*;version=${project.version}</Export-Package>
           </instructions>
         </configuration>
       </plugin>
@@ -34,6 +35,11 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>osgi.cmpn</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.google.protobuf</groupId>
@@ -50,6 +56,16 @@
     <dependency>
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.netty</groupId>
+      <artifactId>netty-all</artifactId>
+      <version>4.0.56.Final</version>
+    </dependency>
+    <dependency>
+      <groupId>code.google.nfs.rpc</groupId>
+      <artifactId>nfs-rpc-common</artifactId>
+      <version>${project.version}</version>
     </dependency>
   </dependencies>
 </project>

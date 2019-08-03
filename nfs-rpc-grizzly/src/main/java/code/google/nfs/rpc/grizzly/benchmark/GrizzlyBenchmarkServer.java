@@ -19,6 +19,7 @@ public class GrizzlyBenchmarkServer extends AbstractBenchmarkServer {
     }
   }
 
+  @Override
   public Server getServer() {
     return new GrizzlyServer();
   }

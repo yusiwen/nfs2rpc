@@ -30,6 +30,7 @@ public class GrizzlyClient extends AbstractClient {
   }
 
   @SuppressWarnings({ "unchecked", "rawtypes" })
+  @Override
   public void sendRequest(RequestWrapper wrapper, int timeout) throws Exception {
     connection.write(wrapper, new CompletionHandler() {
 
@@ -49,22 +50,27 @@ public class GrizzlyClient extends AbstractClient {
     });
   }
 
+  @Override
   public String getServerIP() {
     return targetIP;
   }
 
+  @Override
   public int getServerPort() {
     return targetPort;
   }
 
+  @Override
   public int getConnectTimeout() {
     return connectTimeout;
   }
 
+  @Override
   public long getSendingBytesSize() {
     return connection.getWriteBufferSize();
   }
 
+  @Override
   public ClientFactory getClientFactory() {
     return GrizzlyClientFactory.getInstance();
   }
